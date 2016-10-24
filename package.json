@@ -1,0 +1,30 @@
+{
+  "name": "errorme",
+  "version": "1.0.0",
+  "description": "Error manager for handling errors withing the classes by creating self defined error codes and parsing them into http error codes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kmanaseryan/error-manager.git"
+  },
+  "keywords": [
+    "error",
+    "codes",
+    "error",
+    "manaer",
+    "error",
+    "parsing",
+    "self-defined",
+    "error",
+    "codes"
+  ],
+  "author": "Karlen Manaseryan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kmanaseryan/error-manager/issues"
+  },
+  "homepage": "https://github.com/kmanaseryan/error-manager#readme"
+}
