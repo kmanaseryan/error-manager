@@ -26,5 +26,8 @@
   "bugs": {
     "url": "https://github.com/kmanaseryan/error-manager/issues"
   },
-  "homepage": "https://github.com/kmanaseryan/error-manager#readme"
+  "homepage": "https://github.com/kmanaseryan/error-manager#readme",
+  "dependencies": {
+    "response-http-json": "^1.0.0"
+  }
 }

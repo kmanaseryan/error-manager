@@ -5,7 +5,7 @@ const ERROR_LANGUAGES = CONFIG.ERROR_LANGUAGES;
 
 var _ = require('lodash');
 
-var JsonResponse = require('../json-response')
+var JsonResponse = require('response-http-json')
 
 const ErrorManager = {};
 
