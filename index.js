@@ -10,6 +10,17 @@ var _ = require('lodash');
 const errorme = {};
 
 /**
+ * @type object
+ * @description Optional configurations such us whether should show custom error messages or not
+ * @property {Boolean} showCustomErrMessages - Show custom error messages
+ * @author Karlen Manaseryan <kmanaseryan@gmail.com>
+ */
+var _options = {
+	showCustomErrMessages: process.env.DEV
+}
+
+
+/**
  * @type function
  * @access private
  * @param {string} name - The name of the key of [ERRORS] varant object 
@@ -70,7 +81,7 @@ var _makeHttpError =  (code, message) => {
 			error.message = httpCode.MESSAGE;
 		}
 	} catch (error) {
-		let err = new RangeError("The provided [code] http code:" + JSON.stringify(code)
+		let err = new RangeError("The provided [code] http code: " + JSON.stringify(code)
 			+ " is not valid. Please check the http config file under the /config/http folder.");
 		throw err;
 	}
