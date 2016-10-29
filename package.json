@@ -28,6 +28,6 @@
   },
   "homepage": "https://github.com/kmanaseryan/error-manager#readme",
   "dependencies": {
-    "response-http-json": "^1.0.0"
+    "lodash": "^4.16.4"
   }
 }

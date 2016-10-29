@@ -1,13 +1,13 @@
 'use strict';
 const CONFIG = require('./config');
+const HTTP_ERROR_CODE_CONSTANTS = require('./config/http');
+
 const ERRORS = CONFIG.ERRORS;
 const ERROR_LANGUAGES = CONFIG.ERROR_LANGUAGES;
 
 var _ = require('lodash');
 
-var JsonResponse = require('response-http-json')
-
-const ErrorManager = {};
+const errorme = {};
 
 /**
  * @type function
@@ -51,6 +51,34 @@ var _getErrorByCode = (code)=>{
 
 /**
  * @type function
+ * @description Creats HTTP error
+ * @returns {Object} error information with HTTP error message and code
+ * @param {Number} code: http error status code 
+ * @param {String} message: Information about the error
+ * @author Karlen Manaseryan <kmanaseryan@gmail.com>
+ */
+var _makeHttpError =  (code, message) => {
+	let httpCode = HTTP_ERROR_CODE_CONSTANTS["ERROR_" + code];
+	let error;
+	try {
+		code = httpCode.CODE;
+		error = {
+			code: code,
+			message: message || httpCode.MESSAGE
+		}
+		if(!_options.showCustomErrMessages){
+			error.message = httpCode.MESSAGE;
+		}
+	} catch (error) {
+		let err = new RangeError("The provided [code] http code:" + JSON.stringify(code)
+			+ " is not valid. Please check the http config file under the /config/http folder.");
+		throw err;
+	}
+	return error;
+}
+
+/**
+ * @type function
  * @access private
  * @param {object} error - Errors type of object containing information about error
  * @param {string} lang - The error language in which it is required to parse
@@ -71,7 +99,7 @@ var _parseErrorTo = (error, lang)=>{
 		throw e;
 	}
 	if(lang == 'http'){
-		return JsonResponse.makeError(error.httpCode, error.message);
+		return _makeHttpError(error.httpCode, error.message);
 	}
 }
 
@@ -84,7 +112,7 @@ var _parseErrorTo = (error, lang)=>{
  * @returns {object}
  * @author Karlen Manaseryan <kmanaseryan@gmail.com>
  */
-ErrorManager.getError = (key, message)=>{
+errorme.getError = (key, message)=>{
 	let _key = parseInt(key);
 	let error;
 	console.log(_key)
@@ -105,8 +133,8 @@ ErrorManager.getError = (key, message)=>{
  * @returns {object}
  * @author Karlen Manaseryan <kmanaseryan@gmail.com>
  */
-ErrorManager.getHttpError = (key, message)=>{
-	return ErrorManager.getError(key, message).parseTo('http');
+errorme.getHttpError = (key, message)=>{
+	return errorme.getError(key, message).parseTo('http');
 }
 
 /**
@@ -126,4 +154,4 @@ const Errors = function(error, message){
 	return this;
 }
 
-module.exports = ErrorManager;
+module.exports = errorme;
