@@ -1,16 +1,10 @@
 # Overview
-This [node module](https://www.npmjs.com/package/errorme) helps you to  create your own errors with your defined error codes and handle them differently within your classes. Suppouse we have created Archieve Manager module which does database operations and able to pass errors in callbacks. You can define your own error codes as you may have done before by doing `new Error(<error message>, <error code>)` etc.  However the difference here is that you can parse that error object into HTTP error message with appropriate error HTTP error codes by integrating it with your RESTful service.
-
-
-
+This [node module](https://www.npmjs.com/package/errorme) helps you to  create your own errors with your defined error codes and handle them differently within your classes. Suppose we have created Archive Manager module which does database operations and is able to pass errors in callbacks. You can define your own error codes as you may have done before by doing `new Error(<error message>, <error code>)` etc.  However the difference here is that you can parse that error object into HTTP error message with appropriate error HTTP error codes by integrating it with your RESTful service.
 
 # Features
 * Creating error objects with self-defined error codes
 * Parsing them to HTTP error codes and messages
-* Abality to  add custom error messages in development einvironement and see them in the client-side of the RESful service
-
-
-
+* Ability to  add custom error messages in development environment and see them in the client-side of the RESTful service
 
 # Installation
 `$ npm install errorme`
@@ -43,12 +37,12 @@ module.exports = {
 		}
 	}
 }
-
-
-
-
 ```
-Here is provided most common errors with specified error names (which are the keys of `ERROR` property), codes and default error messages (this messages are visible to the client i.e. if you send it through HTTP, then the client will see the specified value of `DEFAULT_MESSAGE` and `HTTP_CODE`).
+Here are provided the most common errors with specified error names (which are the keys of `ERROR` property), codes and default error messages (this messages are visible to the client i.e. if you send it through HTTP, then the client will see the specified value of `DEFAULT_MESSAGE` and `HTTP_CODE`).
+
+
+
+
 
 
 
@@ -58,13 +52,19 @@ You can change the values of `CODE`, `DEFAULT_MESSAGE` and `HTTP_CODE` with your
 
 
 
+
+
+
+
 # errorme API
 `var errorme = require("errorme");`
 
+
 **.getError(error_key, error_message)**
 
+
 * *error_key* - Either error code or error name defined in `config/index.js` file
-* *error_message* - An error message which will be visible for the client if the process einvironement variable `DEV` is `true`
+* *error_message* - An error message which will be visible for the client if the process environment variable `DEV` is `true`
     
    Returns object which has the following methods and properties:
     
@@ -87,20 +87,18 @@ You can change the values of `CODE`, `DEFAULT_MESSAGE` and `HTTP_CODE` with your
     
     **Example:**
 
-    `errorme.getError(102, "User document is not found for the specified id");`
-    
+    `errorme.getError(102, "User document is not found for the specified id");` 
     Here the error code is 102. For geting error by error name:
     `errorme.getError("DATABASE_ERROR", "User document is not found for the specified id");`
 
-    
 **.getHttpError(error_key, error_message)**
 * *error_key* - Either error code or error name defined in `config/index.js` file. **Note that this is not HTTP error code. It is the self-defined error code which is matched with appropriate HTTP error code**
-* *error_message* - An error message which will be visible for the client if the process einvironement variable `DEV` is `true`
+* *error_message* - An error message which will be visible for the client if the process environment variable `DEV` is `true`
 
-    Returns object. The result of this function can be acheived by calling **.getError(error_key, error_message)** function and then call the **.parseTo('http')** function of returned object (*see below API*). 
+    Returns object. The result of this function can be achived by calling **.getError(error_key, error_message)** function and then call the **.parseTo('http')** function of returned object (*see below API*). 
     
 # returned error object API
-So you have got the created your error by calling **.getError()** function. Below is yet the only function of error object.
+So you have created your error by calling **.getError()** function. Below is yet the only function of error object.
 
 
 **.parseTo(error_language)** - *Parse the error into desired "error language" such as HTTP protocol errors*
@@ -115,7 +113,7 @@ So you have got the created your error by calling **.getError()** function. Belo
         HTTP protocol error code should be number
     * `message`
         
-        Error message which equals to custom error message previouly added when created the object or equals to `DEFAULT_MESSAGE`
+        Error message which equals to custom error message previously added when created the object or equals to `DEFAULT_MESSAGE`
     
     **Example**
     
@@ -131,9 +129,22 @@ So you have got the created your error by calling **.getError()** function. Belo
     ```    
 # Next features
 * Will be ability to add other "error languages"
-* Optimiziation for working with error codes defined by external service providers
+* Optimization for working with error codes defined by external service providers
     
         
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
