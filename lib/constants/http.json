@@ -1,4 +1,4 @@
-module.exports = {
+{
 	"ERROR_400": { "CODE": 400, "MESSAGE": "Bad Request" },
 	"ERROR_401": { "CODE": 401, "MESSAGE": "Unauthorized" },
 	"ERROR_404": { "CODE": 404, "MESSAGE": "Not Found" },

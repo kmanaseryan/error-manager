@@ -46,3 +46,7 @@ jspm_packages
 
 # Output of 'npm pack'
 *.tgz	
+
+# VSC
+jsconfig.json
+.vscode

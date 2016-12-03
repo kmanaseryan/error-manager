@@ -1,10 +1,10 @@
 {
   "name": "errorme",
   "version": "1.0.2",
-  "description": "Error manager for handling errors withing the classes by creating self defined error codes and parsing them into http error codes",
+  "description": "Error manager for handling errors within the classes by creating self defined error codes and parsing them into http error codes",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "set DEV=true && node node_modules/mocha/bin/mocha -t 10000 ./tests/test.js"
   },
   "repository": {
     "type": "git",
@@ -27,7 +27,8 @@
     "url": "https://github.com/kmanaseryan/error-manager/issues"
   },
   "homepage": "https://github.com/kmanaseryan/error-manager#readme",
-  "dependencies": {
-    "lodash": "^4.16.4"
+  "devDependencies": {
+    "mocha": "^3.2.0",
+    "should": "^11.1.1"
   }
 }
