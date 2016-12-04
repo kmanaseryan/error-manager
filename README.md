@@ -5,6 +5,7 @@ This [node module](https://www.npmjs.com/package/errorme) helps you to  create y
 * Creating errors objects instance of `Error` class from the self-defined error codes
 * Throw the created error any time with informative error message/code and error stack
 * Parse any error to HTTP error codes and messages
+* Usage with express middleware 
 * See custom and informative error messages in the client-side of the REST in development environment
 
 # ECMAScript support
@@ -84,7 +85,29 @@ someFunction("some paramas", (error, data)=>{
 	}
 });
 ```  
+Using with [express](https://www.npmjs.com/package/express)
 
+```javascript
+let express = require('express');
+let app = express();
+let errorme = require('errorme')();
+
+//creates middleware
+errorme.middleware(app);
+ 
+app.get('/', function (req, res) {
+	let data = {
+		foo: "Foo data"
+	}
+	let err;
+	
+	// uncoment below if you want to send http error message (data argument will be ignored)
+	// err = errorme.getError(100);
+	res.errormeSend(err, data);
+});
+ 
+app.listen(3000);
+```
 
 # Next features
 * Will be ability to add other "error languages"

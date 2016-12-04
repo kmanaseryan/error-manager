@@ -485,4 +485,48 @@ describe("testing errorme module functions", function(){
 		})
 	})
 	
+	describe("testing express middleware", function(){
+		let jsonData, status;
+		var res = {
+			status: function(_status){
+				status = status;
+			},
+			send: function(data){
+				jsonData = JSON.parse(data);	
+			}
+		};
+		var app = {
+			use: function(callback){
+				callback(null, res);
+			}
+		}
+		it("if error exist then errormeSend() should send the appropriate error", function(){
+			errorme.middleware(app);
+			process.env.DEV = true;
+			var err = errorme.getError(102);
+			res.errormeSend(err)
+			should.not.exist(jsonData.data);
+			jsonData.error.code.should.equal(err.code);
+			jsonData.status.should.equal(err.httpCode);
+			jsonData.error.message.should.equal(err.message);
+		});
+		it("if error does not exist errormeSend() should send the appropriate data", function(){
+			errorme.middleware(app);
+			process.env.DEV = true;
+			res.errormeSend(null, {info: "Some info"});
+			should.not.exist(jsonData.error);
+			jsonData.data.info.should.equal("Some info");
+		});
+		it("if error is not instance ErrormeError errormeSend() then should throw error", function(){
+			errorme.middleware(app);
+			process.env.DEV = true;
+			try {
+				res.errormeSend({});
+			} catch (error) {
+				error.message.should.equal("error argument is not instance of ErrormeError class")	
+			}
+		});
+		
+	});
+	
 });
