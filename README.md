@@ -19,7 +19,7 @@ Check the docs [here](https://kmanaseryan.github.io/).
 # Examples
 To understand the real use case it will be better to see it with [async](https://www.npmjs.com/package/async) module, especially with [async/waterfall](http://caolan.github.io/async/docs.html#waterfall)
 
-```
+```javascript
 let waterfall = require('async/waterfall');
 let errorme = require('errorme')();
 
