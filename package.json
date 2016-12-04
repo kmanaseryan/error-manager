@@ -13,13 +13,12 @@
   "keywords": [
     "error",
     "codes",
-    "error",
-    "manaer",
-    "error",
-    "parsing",
-    "self-defined",
-    "error",
-    "codes"
+    "error-manager",
+    "error-codes",
+    "http-error",
+    "http-codes",
+    "json-error",
+    "parse-error"
   ],
   "author": "Karlen Manaseryan",
   "license": "ISC",
