@@ -1,3 +1,4 @@
+[![NSP Status](https://nodesecurity.io/orgs/app/projects/34075a50-2c38-4a96-9b08-c70210b2abec/badge)](https://nodesecurity.io/orgs/app/projects/34075a50-2c38-4a96-9b08-c70210b2abec)
 # Overview
 This [node module](https://www.npmjs.com/package/errorme) helps you to  create your own errors with your defined error codes and handle them differently within your classes. Suppose we have created Archive Manager module which does database operations and is able to pass errors in callbacks. You can define your own error codes as you may have done before by doing `new Error(<error message>, <error code>)` etc.  However the difference here is that you can parse that error object into HTTP error message with appropriate HTTP error by integrating it with your RESTful service.
 
