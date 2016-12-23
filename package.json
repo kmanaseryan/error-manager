@@ -4,7 +4,7 @@
   "description": "Error manager for handling errors within the classes by creating self defined error codes and parsing them into http error codes",
   "main": "index.js",
   "scripts": {
-    "test": "set DEV=true && node node_modules/mocha/bin/mocha -t 10000 ./tests/test.js"
+    "test": "set DEV=true && istanbul cover _mocha -t 10000 -R ./tests/test.js"
   },
   "repository": {
     "type": "git",

@@ -101,6 +101,57 @@ describe("testing errorme module intialization", function(){
 		})
 	});
 	
+	describe("adding 'bad' errors", function(){
+		var errorme;
+		var extraErrors = {}, codes = [], errorNames = [];
+		
+		it("DEFAULT_MESSAGE property is required", function(){
+			try {
+				errorme = require('../index.js')([{CODE: 12}]);
+			} catch (error) {
+				error.name.should.equal("MissingValueError")
+				error.message.should.equal("DEFAULT_MESSAGE property is required");
+			}
+		});
+		it("HTTP_CODE property is required", function(){
+			try {
+				errorme = require('../index.js')([{CODE: 12, DEFAULT_MESSAGE: "asdasd"}]);
+			} catch (error) {
+				error.name.should.equal("MissingValueError")
+				error.message.should.equal("HTTP_CODE property is required");
+			}
+		});	
+		it("NAME property is required", function(){
+			try {
+				errorme = require('../index.js')([{CODE: 12, DEFAULT_MESSAGE: "asdasd", HTTP_CODE: 1}]);
+			} catch (error) {
+				error.name.should.equal("MissingValueError")
+				error.message.should.equal("NAME property is required");
+			}
+		});
+		it("Error name should be string.", function(){
+			try {
+				errorme = require('../index.js')([{CODE: 12, DEFAULT_MESSAGE: "asdasd", HTTP_CODE: 404, NAME:22}]);
+			} catch (error) {
+				error.name.should.equal("InvalidValueError")
+				error.message.should.equal("Error name should be string.");
+			}
+		});
+		it("CODE property is required", function(){
+			try {
+				errorme = require('../index.js')([{}]);
+			} catch (error) {
+				error.name.should.equal("MissingValueError")
+				error.message.should.equal("CODE property is required");
+			}
+		});	
+		after(function(done){
+			delete require.cache[require.resolve('../index.js')];
+			delete require.cache[require.resolve('../lib/errorme')];
+			done();
+		})
+	});
+	
 	describe("overwriting error list", function(){
 		var errorme;
 		var extraErrors = {}, codes = [], errorNames = [];
