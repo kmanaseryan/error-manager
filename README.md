@@ -1,7 +1,7 @@
 [![NSP Status](https://nodesecurity.io/orgs/app/projects/34075a50-2c38-4a96-9b08-c70210b2abec/badge)](https://nodesecurity.io/orgs/app/projects/34075a50-2c38-4a96-9b08-c70210b2abec)
+[![Build Status](https://travis-ci.org/kmanaseryan/error-manager.svg?branch=master)](https://travis-ci.org/kmanaseryan/error-manager)
 # Overview
-This [node module](https://www.npmjs.com/package/errorme) helps you to  create your own errors with your defined error codes and handle them differently within your classes. Suppose we have created Archive Manager module which does database operations and is able to pass errors in callbacks. You can define your own error codes as you may have done before by doing `new Error(<error message>, <error code>)` etc.  However the difference here is that you can parse that error object into HTTP error message with appropriate HTTP error by integrating it with your RESTful service.
-
+This [node module](https://www.npmjs.com/package/errorme) helps you to  create your own errors with your defined error codes and handle them within classes in a proper way.
 # Features
 * Creating errors objects instance of `Error` class from the self-defined error codes
 * Throw the created error any time with informative error message/code and error stack
@@ -15,8 +15,49 @@ ES6 only
 # Installation
 `$ npm install errorme`
 
-# How to use?
-Check the docs [here](https://kmanaseryan.github.io/).
+# API
+Check the JSDoc [here](https://kmanaseryan.github.io/).
+
+#Installation
+`npm install errorme --save`
+
+#Usage
+You can add your custom errors or use the [default errors](https://github.com/kmanaseryan/error-manager/blob/master/lib/constants/default.json).
+```javascript
+//defining our custom errors
+const errors = {
+	"ValidationError": {
+		"CODE": 100,
+		"DEFAULT_MESSAGE": "The provided data is not valid",
+		"HTTP_CODE": 400
+	},
+	"ServiceError": {
+		"CODE": 101,
+		"DEFAULT_MESSAGE": "Error happend related to the third party service",
+		"HTTP_CODE": 500
+	},
+}
+//overwriting defaults errors and requiring to show logs once an error created
+let options = { overwrite: true, showLogs: true }
+//requiring module
+let errorme = require('errorme')(errors, options)
+
+//getting error
+let code = 100, customMessage = "The provided data is invalid"; 
+let err = errorme.getError(code, customMessage) //custom message will be visible if process.env.DEV=true
+console.log(err instanceof Error) //true
+//parsing error to http
+let httpErr = err.parseTo('http')
+console.log(httpErr.code) //400
+console.log(httpErr.definedCode) //100
+console.log(httpErr.message) //"Bad request"
+
+//create http error
+let newHttpErr = errorme.getHttpError(100);
+console.log(newHttpErr.code == httpErr.code) //true
+console.log(newHttpErr.message == httpErr.message) //true
+
+```
 
 # Examples
 To understand the real use case it will be better to see it with [async](https://www.npmjs.com/package/async) module, especially with [async/waterfall](http://caolan.github.io/async/docs.html#waterfall)
