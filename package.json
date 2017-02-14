@@ -1,6 +1,6 @@
 {
   "name": "errorme",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "description": "Error manager for handling errors within the classes by creating self defined error codes and parsing them into http error codes",
   "main": "index.js",
   "scripts": {
